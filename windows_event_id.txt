@@ -1,0 +1,36 @@
+in windows, when an action happen, it will be record twice that result in log duplication, one record is done by sysmon while the other one is done by windows security 
+
+
+sysmon: 
+    1   process creation 
+    3   network connection detection where tcp or udp package captured 
+    11  file creation 
+    17  pipe craetion 
+    18  pipe connected 
+
+
+windows security 
+    4663    file object access
+    2889    insecure ldap authentication
+    4624    secure ldap (and other apps) authentication 
+    4662    active directory query over ldap channel 
+
+    4886    active directory certificate request, if 4887 is missing and log use 4886 to indicate success also
+    4887    active directory certificate confimed and issued 
+    4888    active directory certificate request was denied 
+
+    5140    remote file access (smb) 
+    4104    command excecution 
+
+    4624    record all the authentication event in windows, regardless the service 
+        type 2      login to desktop locally 
+        type 3      access to a resource over network (for example smb) 
+        type 10     remote desktop login 
+        type 4      schedule task 
+        type 5      login to a service 
+        type 7      unclock the screen 
+
+
+
+
+

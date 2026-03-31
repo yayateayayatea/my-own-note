@@ -1,0 +1,29 @@
+following is for compile process that generate object file 
+-Wall		turns on all warnings
+-ansi 		turns of c99 extensions
+-pedantic 	turns on additional checks for c89 compliance 
+-D 		takes in #define name value, example -D name="gordon" 
+
+
+following is for linking object file (s) 
+library 
+	-lm	math.h 
+
+
+make procedure 
+targetfile : prerequisite (s) ...
+	recipe (or call it command) 
+	#this is a commant line 
+prerequisite : pre of pre 
+	command 
+clean: 
+	command 
+
+make		run the Makefile 
+make file01	run file01 targetfile in Makefile only 
+
+
+
+
+
+
