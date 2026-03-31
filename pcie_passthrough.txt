@@ -1,0 +1,46 @@
+#tell the linux operating system not to use nvidia gpu 
+sudo nano /etc/modprobe.d/blacklist-nvidia.conf 
+blacklist nvidia
+blacklist nouveau
+blacklist nvidia_drm
+blacklist nvidia_modeset
+
+
+
+#bind the nvidia card to a spcial pcie bus
+#normal pcie bus is loaded by operating system 
+#vfio bus, on the other hand, will ignore by the operating system 
+sudo nano /etc/modprobe.d/vfio.conf 
+options vfio-pci ids="the id of the pcie bus where the nvidia card is" 
+
+
+
+#to find the harware id of nvidia card
+#this will print all the pcie bus and endpoint devices on it 
+lspci -t -n 
+
+#find the name of hardware, grep it 
+lspci -nn | grep -i nvidia 
+
+
+
+#now, the above two actions (blacklist nvidia and bind nvidia to vfio) might be happen late
+#the operating system might use nvidia in an early stage
+#so we need to make the blacklist and binding action happen really early, at initramfs stage 
+sudo nano /etc/initramfs-tools/modules 
+vfio
+vfio_iommu_type1
+vfio_pci
+vfio_virqfd
+
+
+
+#remember to update initramfs 
+sudo update-initramfs -u 
+
+#and reboot 
+sudo reboot 
+
+
+#after reboot, inspect what is the driver (vfio or nvidia) used by the nvidia card 
+lspci -nnk -d 'hardware id of nvidia card' 
