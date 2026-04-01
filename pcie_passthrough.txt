@@ -44,3 +44,22 @@ sudo reboot
 
 #after reboot, inspect what is the driver (vfio or nvidia) used by the nvidia card 
 lspci -nnk -d 'hardware id of nvidia card' 
+
+
+#the use virt-manager to create virtual machine 
+
+#this is the code to find windows activation key 
+sudo strings /sys/firmware/acpi/tables/MSDM
+
+#install the nvidia driver, reboot 
+#enable rdp connection 
+#change network profile from public to private 
+#create local account with password if needed 
+
+#login via xfreerdp 
+xfreerdp /v:192.168.122.194 /u:vmuser /p:YourPassword \
+/f /dynamic-resolution /gfx /network:auto 
+
+#control + alt + enter -> enter or exit full screen mode 
+
+
