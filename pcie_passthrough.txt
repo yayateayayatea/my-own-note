@@ -52,6 +52,9 @@ lspci -nnk -d 'hardware id of nvidia card'
 sudo strings /sys/firmware/acpi/tables/MSDM
 
 #install the nvidia driver, reboot 
+
+
+#the below use rdp connection for frame streaming 
 #enable rdp connection 
 #change network profile from public to private 
 #create local account with password if needed 
@@ -60,6 +63,35 @@ sudo strings /sys/firmware/acpi/tables/MSDM
 xfreerdp /v:192.168.122.194 /u:vmuser /p:YourPassword \
 /f /dynamic-resolution /gfx /network:auto 
 
+
+
+#the below use share memory to make better display windows and faster interaction
+
 #control + alt + enter -> enter or exit full screen mode 
+virsh --connect qemu:///system list --all
+virsh --connect qemu:///system edit YOUR_VM_NAME
+
+#add the following config inside <devices> 
+<shmem name='looking-glass'>
+  <model type='ivshmem-plain'/>
+  <size unit='M'>32</size>
+</shmem>
+
+#add permission for share memory device to access the hugepages memory
+sudo nano /etc/tmpfiles.d/10-looking-glass.conf
+f /dev/shm/looking-glass 0660 lightingfruit kvm -
+sudo systemd-tmpfiles --create /etc/tmpfiles.d/10-looking-glass.conf
+
+#in vm, install looking-glass-host via web 
+#in host, apt install *tools for build 
+
+#clone the repo 
+git clone https://github.com/gnif/LookingGlass
+cd LookingGlass
+git submodule update --init --recursive
+cd LookingGlass/client
+cmake -B build
+cmake --build build -j$(nproc)
+
 
 
