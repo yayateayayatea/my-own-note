@@ -1,0 +1,1 @@
+fsck -fy /dev/mapper/name--vg-home/root
