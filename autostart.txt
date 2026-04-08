@@ -1,0 +1,44 @@
+init or boot level 
+	systemd unit 
+		/etc/systemd/system	(system wide unit, highest priority) 
+		/run/systemd/system	(runtime unit) 
+		/usr/lib/systemd/system	(vendor-provided unit) 
+		/etc/systemd/user 	(units for all user) 
+		~/.config/systemd/user	(specific user unit) 
+		/usr/lib/systemd/user 	(vendor provided user unit)  
+		.service 
+		.timer 
+		WantedBy=multi-user.target 
+	rc script (legacy) 
+		/etc/rc.local
+		/etc/init.d/* 
+	kernel-level 
+		/etc/modules
+		/etc/modprobe.d 
+		initramfs hooks 
+
+
+scheduled execution 
+	cron 
+		/etc/crontab (system wide) 
+		/etc/cron.*  (system wide) 
+		crontab -e 
+	anacron (run missed job for non 24/7 systems) 
+	system timers 
+
+
+user login or session start 
+	shell initialization files 
+		~/.bashrc, ~/.bash_profile, ~/.profile
+	pam (pluggable authentication modules) 
+		/etc/pam.d/* 
+	force commands during ssh login 	
+		~/.ssh/authorized_keys 
+
+
+gui startup 
+	xdg autostart 
+		/etc/xdg/autostart/*.desktop 
+		~/.config/autostart/*.desktop 
+
+
