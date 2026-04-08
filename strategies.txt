@@ -1,0 +1,57 @@
+// atomic data 
+data is retrieved at 2D array 
+every stock in rows 
+every timestamp in column
+
+day1 		day2	.....
+price of s1	price of s1
+price of s2	price of s2
+.
+.
+.
+
+open			- open price of all stocks in chosen universe 
+close			- close price of all stocks in chosen universe 
+high 			- highest price of all stocks in chosen universe 
+low 			- lowest price of all stocks in chosen universe 
+volume 			- number of share traded 
+vwap 			- average price of trade 
+turnover		-
+cap 			- market cap 
+shares_outstanding 	- total shares issued 
+float 			- free float share 
+bid
+ask 
+spread 
+sector 
+insdustry 
+subinsdustry 
+
+
+
+
+
+// mean reversion: 
+// we predict a price will fall back after a certail spark, vise versa 
+// the negative sign indicate opposite direction, price goes up will certaily goes down eventually 
+-rank(-ts_delta(close, numOfDays)) 
+
+
+// momentum
+// we predict a price will continue to grow after the price has beening gorwing for a certain period 
+ts_regression(close, numOfDays) 
+
+
+// information or leat-lag effect 
+// we predict the price will go downs if the trading price is increasing while the volume do not increase much, worsen if the volume decrease 
+// vwap : volume weighted average price 
+rank(vwap, close) 
+
+
+// buy cheap 
+// compare the market value and the value the company shows on its assest or report 
+rank(equity / market_cap) 
+
+
+//
+
