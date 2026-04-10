@@ -1,0 +1,31 @@
+bridge - an emulated switch
+	ip link add bridge_name type bridge 
+	ip link set bridge_name up  
+
+netns - another 'logical' computers 
+	ip netns add pc01 
+
+veth - an emulated ethernet cable that connected between two kernel namespace 
+	ip link add veth_left type veth peer name veth_right (this create one ethernet cable, each end has their own names) 
+	ip link set veth_right netns pc01 (connect one side to the pc) 
+	ip link set veth_left master bridge_name (connect the other side to switch)  
+	
+tap - an emulated ethernet cable that connected between kernel and user-space namespace (not used in this example)
+	ip tuntap add dev tap0 mode tap
+	ip link set tap0 up
+
+
+after creating the devices and connect them (veth or tap), we need to turn them on 
+ip link set veth_left up (turn on the swtich port)
+ip -n pc01 ip link set lo up (turn on the computer loopback)
+ip -n pc01 ip link set veth_left (turn on the computer ethernet)
+
+add ip address to computer
+ip -n pc01 addr add 192.168.0.11/24 dev veth_right
+
+now we have successfully create a LAN 
+
+below is to make the devices access internet 
+
+turns the layer 2 swtich to layer 3 multilayer swtich that is able to do routing 
+ip addr add 192.168.0.1/24 dev bridge_name 
