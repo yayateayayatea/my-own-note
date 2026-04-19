@@ -1,0 +1,22 @@
+technique of antivirus to detect malware 
+1, signature
+2, behavioral 
+3, sandbox - the av actually run the code in sandbox 
+
+
+3 thing to change for evasion 
+1, the structure and byte - signature detection 
+2, behaviour at runtime 
+3, execution timing and environment check - dont run the real code first 
+
+
+
+//input: normal.exe
+//output: injected.exe
+inject payload to a normal executable 
+shellter 
+
+
+
+encrypt the modified executable 
+wine hyperion -v injected_normal.exe encrypted_injected_normal.exe
