@@ -20,3 +20,21 @@ shellter
 
 encrypt the modified executable 
 wine hyperion -v injected_normal.exe encrypted_injected_normal.exe
+
+all the above might failed because the payload is provided by msf, which clearly its signatured is recorded 
+
+
+
+
+//wirte our own evasion 
+1, get shellcode into memory
+2, make that memory executable 
+3, jump to it 
+
+//windows api for above 
+VirtualAlloc() - allocate memory 
+memcpy() - write shellcode into it 
+VirtualProtect() -makr it executable 
+CreateThread() - execute it 
+
+
