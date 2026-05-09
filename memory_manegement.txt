@@ -1,0 +1,39 @@
+virtual address layout 
+sign extend                     16bits 
+page global directory offset    9bits (2^9 = 512, 512 * 8bytes = 4kb)
+page upper directory offset     9bits
+page middle directory offset    9bits 
+physical page offset (pte)      12bits (2^12 = 4kb)
+    no execute                  63bits
+    protections keys            4bits
+    software define             4bits 
+    ignore                      5bits 
+    physical address of 4kb     40bits (this points to real memory a program use)
+    software define             3bits 
+    ignore                      2bits 
+    dirty                       6bits 
+    accessed                    5bits 
+    chche ignore                2bits
+    user mode access            2bits 
+    r/w write                   1bits 
+    present                     0bits 
+
+
+1, cpu check cr3 register
+2, a running process with have its pgd on cr3
+3, 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
