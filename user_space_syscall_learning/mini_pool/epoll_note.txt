@@ -1,0 +1,14 @@
+epoll is a kernel object that keep track of fd 
+
+epoll_create1() 
+
+epoll_ctl()		:add/remove/modify fd 
+
+epoll_wait() 		:sleep until something become ready 
+
+handle the returned events 
+
+epoll_wait() 		:again 
+
+
+

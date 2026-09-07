@@ -1,0 +1,17 @@
+# able debug, the -O0 stand for optimize = 0, meaning dont change code  
+gcc -g3 -O0 -ggdb -fno-omit-frame-pointer -o prog prog.c
+(g3 allow macro)
+
+# run the program with debug enable 
+gdb ./file.elf 
+
+# list out the source code 
+list 
+
+# set breakpoint based on function name 
+break main 
+
+# let the program run 
+
+# the program will stop at breakpoint, run next line of code 
+next 

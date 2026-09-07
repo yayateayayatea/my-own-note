@@ -1,0 +1,4 @@
+Makefile
+my_dup.c
+my_dup.elf
+output.txt
